@@ -90,6 +90,8 @@ Example Query:
 
 ## How to start Project
 
+[quick video](https://www.loom.com/share/de34d14e984d487ca2ce9caf99195fe8)
+
 ### Requirements
 
 - Node >= 18.0.0
