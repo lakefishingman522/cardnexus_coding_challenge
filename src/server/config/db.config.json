@@ -20,15 +20,13 @@
         "type": "string",
         "required": true,
         "enum": [
-          [
-            "Common",
-            "Enchanted",
-            "Legendary",
-            "Promo",
-            "Rare",
-            "Super Rare",
-            "Uncommon"
-          ]
+          "Common",
+          "Enchanted",
+          "Legendary",
+          "Promo",
+          "Rare",
+          "Super Rare",
+          "Uncommon"
         ]
       },
       "ink_cost": { "type": "number", "required": true }

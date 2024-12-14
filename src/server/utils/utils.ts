@@ -27,7 +27,7 @@ const convertTypes = (jsonConfig: Record<string, any>) => {
     Object.keys(obj).forEach((key) => {
       if (obj.hasOwnProperty(key)) {
         const value = obj[key];
-        if (value && typeof value === "object") {
+        if (value && typeof value === "object" && !Array.isArray(value)) {
           // If the value is an object (like "gameSpecificAttributes"), process it recursively
           refactoredSchema[key] = refactor(value);
         } else if (
@@ -100,6 +100,25 @@ const mergeEnum = (
   );
 };
 
+// Check if the elements of sublist is in mainlist
+const isSublist = <T>(mainList: Array<T>, subList: Array<T>): boolean => {
+  const excludeElements = subList.filter((ele: T) => !mainList.includes(ele));
+
+  if (excludeElements.length > 0) return false;
+  return true;
+};
+
+// Fid common Elements
+const findCommonElements = <T>(...arrays: T[][]): T[] => {
+  if (arrays.length === 0) {
+    return [];
+  }
+
+  return arrays.reduce((commonElements, currentArray) => {
+    return commonElements.filter((element) => currentArray.includes(element));
+  });
+};
+
 export {
   excludeKey,
   convertTypes,
@@ -107,4 +126,6 @@ export {
   toStringTuple,
   removeDuplicates,
   mergeEnum,
+  isSublist,
+  findCommonElements,
 };

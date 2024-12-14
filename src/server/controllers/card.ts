@@ -3,5 +3,5 @@
  */
 
 export const filterCard = async ({ input }: any) => {
-  return "sucess";
+  return input;
 };

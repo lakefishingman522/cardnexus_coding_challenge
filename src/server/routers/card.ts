@@ -7,10 +7,12 @@ import { publicProcedure, router } from "../trpc";
 import { filterCard } from "../controllers/card";
 import { toStringTuple, mergeEnum } from "../utils/utils";
 import { dbConfig } from "../config/db";
+import removeDuplicatesMiddleware from "../middlewares/removeDuplicatesMiddleware";
+import filterGameNameMiddleware from "../middlewares/filterGameNameMiddleware";
+import filterByEnumMiddleware from "../middlewares/filterByEnumMiddleware";
 
 // get game names
 const gameNames = Object.keys(dbConfig.gameSpecificAttributes);
-console.log(gameNames);
 
 export const cardRouter = router({
   filter: publicProcedure
@@ -75,6 +77,9 @@ export const cardRouter = router({
         })
         .strict()
     )
+    .use(removeDuplicatesMiddleware)
+    .use(filterGameNameMiddleware)
+    .use(filterByEnumMiddleware)
     .query(filterCard),
   // add router for new TCG
 });
