@@ -44,6 +44,8 @@ It ingests the TCG data and uploads on mongodb, it creates the `cards` collectio
 npm run test
 ```
 
+It tests the server endpoints through Jest. You can change the test data in `src/client/test-data.ts`.
+
 ## Commands
 
 ```bash
