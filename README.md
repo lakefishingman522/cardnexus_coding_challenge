@@ -6,6 +6,14 @@ server/client with [tRPC] for ingesting and querying TCG data.
 
 ## How to start Project
 
+## Project Architecture
+
+![Arictecture](./project-architect.png)
+
+## Data Modeling / Indexing
+
+![DataModel](./data-model.png)
+
 ### Requirements
 
 - Node >= 18.0.0
