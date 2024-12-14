@@ -18,7 +18,6 @@ const convertTypes = (jsonConfig: Record<string, any>) => {
     array: Array,
     sbject: Object, // Fixing the typo here ("sbject" -> "object")
   };
-  console.log(jsonConfig);
 
   const refactor = (obj: Record<string, any>): Record<string, any> => {
     const refactoredSchema: Record<string, any> = {};

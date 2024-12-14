@@ -35,9 +35,8 @@
     }
   },
   "indexing": [
-    { "game": true },
     { "name": "text" },
-    { "rarity": true },
+    { "rarity": 1 },
     { "game": 1, "name": 1 },
     { "game": 1, "rarity": 1 },
     { "game": 1, "attributes.color": 1 },

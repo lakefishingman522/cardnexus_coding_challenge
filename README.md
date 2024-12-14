@@ -36,7 +36,7 @@ If all dependencies have been installed successfully, you will receive the messa
 npm run ingest
 ```
 
-It ingests the TCG data and uploads on mongodb, it creates the `cards` table.
+It ingests the TCG data and uploads on mongodb, it creates the `cards` collection.
 
 ## Commands
 
