@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
+import { convertTypes } from "../utils/utils";
 
 dotenv.config();
 
@@ -19,8 +20,9 @@ const disconnectDB = async () => {
 };
 
 // Load the db config
-const dbConfig = JSON.parse(
+const jsonConfig = JSON.parse(
   fs.readFileSync(path.join(__dirname, "./db.config.json"), "utf-8")
 );
+const dbConfig: Record<string, any> = convertTypes(jsonConfig);
 
 export { connectDB, disconnectDB, dbConfig };
