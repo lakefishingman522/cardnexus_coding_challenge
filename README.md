@@ -158,3 +158,9 @@ This makes easy to add the new attribute/game, just by modifying `src/server/con
 
 - Go into `src/server/config/db.config.json` add the new game fields into `gameSpecificAttributes:${newGameName}`. Also you might to need to add the data path in `gameDataPaths:${newGameName}`.
 - Ingest the data by running `npm run ingest`.
+
+## Future Improvements
+
+- In this project, we have to update/create the input validation of the filtering endpoint whenever new attribute/game is added. So we might need to create the new util that creates the input validation based on the TCG card schema.
+- We have to type the logic that creates the db query, but we might need to create the new util that creates the db query based on the TCG card schema. As it grows, we might need to change the order of keys in a query in `src/server/controllers/card.ts:filterCard`.
+- For now, I didn't implement the upsert while ingesting, we might need to implement the upsert.
