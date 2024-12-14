@@ -1,3 +1,5 @@
+import CardInterface from "../types/Card";
+
 // Exclude a specific key from an object
 type ExcludeKey<T, K extends keyof T> = Omit<T, K>;
 const excludeKey = <T, K extends keyof T>(
@@ -65,4 +67,44 @@ const formatKeysInObjects = (
   });
 };
 
-export { excludeKey, convertTypes, formatKeysInObjects };
+// Function to convert a string array into a tuple type ([string, ...string[]]), it is used to create the valid input of z.enum().
+const toStringTuple = (arr: string[] | undefined): [string, ...string[]] => {
+  // Check if the array is undefined or empty
+  if (!arr || arr.length === 0) {
+    throw new Error("Array must be a non-empty string array");
+  }
+
+  // Ensure the array is treated as a tuple
+  return arr as [string, ...string[]];
+};
+
+// Remove duplicated elements
+const removeDuplicates = <T>(list: T[]): T[] => {
+  return [...new Set(list)];
+};
+
+// Function to merge enum values for a specific key from all TCGs
+const mergeEnum = (
+  keyName: string,
+  games: string[],
+  gameFieldsMap: Record<string, CardInterface>
+) => {
+  return removeDuplicates(
+    games
+      .map((gameName) => {
+        return gameFieldsMap[gameName][keyName]?.enum
+          ? gameFieldsMap[gameName][keyName].enum
+          : [];
+      })
+      .flat()
+  );
+};
+
+export {
+  excludeKey,
+  convertTypes,
+  formatKeysInObjects,
+  toStringTuple,
+  removeDuplicates,
+  mergeEnum,
+};
