@@ -24,6 +24,13 @@ const disconnectDB = async () => {
 const jsonConfig = JSON.parse(
   fs.readFileSync(path.join(__dirname, "./db.config.json"), "utf-8")
 );
-const dbConfig = convertTypes(jsonConfig) as DBConfigInteface;
+const dbConfig = {
+  ...convertTypes({
+    commonAttributes: jsonConfig.commonAttributes,
+    gameSpecificAttributes: jsonConfig.gameSpecificAttributes,
+  }),
+  indexing: jsonConfig.indexing,
+  gameDataPaths: jsonConfig.gameDataPaths,
+} as DBConfigInteface;
 
 export { connectDB, disconnectDB, dbConfig };

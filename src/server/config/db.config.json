@@ -43,8 +43,8 @@
     { "game": 1, "attributes.color": 1 },
     { "game": 1, "attributes.ink_cost": 1 }
   ],
-  "gameDataUrls": {
-    "mtg": "https://cardnexus-hiring-docs.s3.eu-west-1.amazonaws.com/lorcana-cards.json",
-    "lorcana": "https://cardnexus-hiring-docs.s3.eu-west-1.amazonaws.com/mtg-cards.json"
+  "gameDataPaths": {
+    "mtg": "./card-data/lorcana-cards.json",
+    "lorcana": "./card-data/mtg-cards.json"
   }
 }

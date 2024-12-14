@@ -7,7 +7,8 @@
     "build": "tsc",
     "dev:server": "tsx watch src/server",
     "dev:client": "wait-port 5000 && tsx watch src/client",
-    "dev": "run-p dev:* --print-label"
+    "dev": "run-p dev:* --print-label",
+    "ingest": "ts-node src/server/scripts/ingestData.ts"
   },
   "dependencies": {
     "@trpc/client": "npm:@trpc/client@next",

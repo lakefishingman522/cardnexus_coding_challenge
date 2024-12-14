@@ -29,3 +29,21 @@ npm run dev
 ```
 
 If all dependencies have been installed successfully, you will receive the message `yay!` on client side.
+
+#### Ingest Data
+
+```bash
+npm run ingest
+```
+
+It ingests the TCG data and uploads on mongodb, it creates the `cards` table.
+
+## Commands
+
+```bash
+npm install             # install dependencies
+npm run ingest          # ingest TCG data and insert on mongodb
+npm run dev:server      # start server
+npm run dev:client      # start client
+npm run dev             # start server/client
+```

@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 import { dbConfig } from "../config/db";
 
-const CardSchema = new mongoose.Schema({
-  ...dbConfig.commonAttributes,
-  ...{ discriminatorKey: "game" }, // Field used for discriminators
-});
+const CardSchema = new mongoose.Schema(dbConfig.commonAttributes);
 
 // indexing
+console.log(dbConfig.indexing);
 dbConfig.indexing.forEach((index: object) => {
   CardSchema.index(index as mongoose.IndexDefinition);
 });

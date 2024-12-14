@@ -18,33 +18,52 @@ const convertTypes = (jsonConfig: Record<string, any>) => {
     array: Array,
     sbject: Object, // Fixing the typo here ("sbject" -> "object")
   };
+  console.log(jsonConfig);
 
-  const processSchema = (obj: Record<string, any>): Record<string, any> => {
-    const result: Record<string, any> = {};
+  const refactor = (obj: Record<string, any>): Record<string, any> => {
+    const refactoredSchema: Record<string, any> = {};
 
-    for (const key in obj) {
+    Object.keys(obj).forEach((key) => {
       if (obj.hasOwnProperty(key)) {
         const value = obj[key];
         if (value && typeof value === "object") {
           // If the value is an object (like "gameSpecificAttributes"), process it recursively
-          result[key] = processSchema(value);
+          refactoredSchema[key] = refactor(value);
         } else if (
           key === "type" &&
           typeof value === "string" &&
           typeMap[value]
         ) {
           // Convert the 'type' string to a TypeScript type
-          result[key] = typeMap[value];
+          refactoredSchema[key] = typeMap[value];
         } else {
-          result[key] = value;
+          refactoredSchema[key] = value;
         }
       }
-    }
+    });
 
-    return result;
+    return refactoredSchema;
   };
 
-  return processSchema(jsonConfig);
+  return refactor(jsonConfig);
 };
 
-export { excludeKey, convertTypes };
+// Reformat each object based on a provided list of keys, add the addtional object
+const formatKeysInObjects = (
+  list: Record<string, any>[],
+  filteringKeys: string[],
+  addtionalObject?: Record<string, any>
+): Record<string, any>[] => {
+  return list.map((obj) => {
+    const filteredObj: Record<string, any> = { attributes: {} };
+
+    Object.keys(obj).forEach((key: string) => {
+      if (filteringKeys.includes(key)) {
+        filteredObj[key] = obj[key];
+      } else filteredObj.attributes[key] = obj[key];
+    });
+    return { ...filteredObj, ...addtionalObject };
+  });
+};
+
+export { excludeKey, convertTypes, formatKeysInObjects };
