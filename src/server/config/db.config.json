@@ -41,7 +41,7 @@
     { "game": 1, "attributes.ink_cost": 1 }
   ],
   "gameDataPaths": {
-    "mtg": "./card-data/lorcana-cards.json",
-    "lorcana": "./card-data/mtg-cards.json"
+    "lorcana": "./card-data/lorcana-cards.json",
+    "mtg": "./card-data/mtg-cards.json"
   }
 }

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import CardInterface from "../types/Card";
 
 // Exclude a specific key from an object
@@ -119,6 +120,27 @@ const findCommonElements = <T>(...arrays: T[][]): T[] => {
   });
 };
 
+// Function to safely query a Mongoose model with schema validation
+const safeFind = async (
+  model: mongoose.Model<any>,
+  query: Record<string, any>,
+  limit: number = 30 // Maximum number of results to return (default: 30)
+) => {
+  // Execute the query with the given conditions and limit
+  const cards = await model
+    .find(query, { _id: 0, __v: 0 })
+    .limit(limit)
+    .lean()
+    .exec();
+
+  // place attributes to top-level
+  const refactoredCards = cards.map((card) => {
+    return { ...excludeKey(card, "attributes"), ...card.attributes };
+  });
+
+  return refactoredCards;
+};
+
 export {
   excludeKey,
   convertTypes,
@@ -128,4 +150,5 @@ export {
   mergeEnum,
   isSublist,
   findCommonElements,
+  safeFind,
 };

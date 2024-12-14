@@ -2,8 +2,10 @@ import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import { publicProcedure, router } from "./trpc.js";
 import dotenv from "dotenv";
 import { cardRouter } from "./routers/card.js";
+import { connectDB } from "./config/db.js";
 
 dotenv.config();
+connectDB();
 
 // default: port 5000
 const port = process.env.PORT || 5000;
