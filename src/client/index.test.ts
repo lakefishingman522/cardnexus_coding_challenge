@@ -49,15 +49,7 @@ async function test() {
     it("test the filter across all of cards", async () => {
       for (const singleTestData of validTestData.card) {
         const response = await trpc.card.filter.query(singleTestData.input);
-        try {
-          expect(Array.isArray(response)).toBe(true);
-        } catch (error) {
-          console.log("Test failed. Response:", {
-            input: singleTestData.input,
-            response,
-          });
-          throw error; // Rethrow the error to ensure the test still fails.
-        }
+        expect(Array.isArray(response)).toBe(true);
 
         // check isExist
         singleTestData.isExist
