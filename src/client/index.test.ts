@@ -1,5 +1,5 @@
 /**
- * This is the client-side code that uses the inferred types from the server
+ * This is the client-side test code that uses the endpoints of tRPC server
  */
 import {
   createTRPCClient,
@@ -7,11 +7,15 @@ import {
   unstable_httpBatchStreamLink,
   unstable_httpSubscriptionLink,
 } from "@trpc/client";
+
+import { describe, expect, it } from "@jest/globals";
+
 /**
  * We only import the `AppRouter` type from the server - this is not available at runtime
  */
-import type { AppRouter } from "../server/index.js";
+import type { AppRouter } from "../server/index.ts";
 import dotenv from "dotenv";
+import { invalidTestData, validTestData } from "./test-data";
 
 dotenv.config();
 
@@ -33,18 +37,45 @@ const trpc = createTRPCClient<AppRouter>({
   ],
 });
 
-async function main() {
-  // ping server
-  const response = await trpc.healthcheck.query();
-  console.log(response);
-
-  // query
-  const cards = await trpc.card.filter.query({
-    game: ["mtg", "lorcana"],
-    rarity: ["Common", "common"],
-    color: ["R", "R", "G"],
+async function test() {
+  describe("Ping Server", () => {
+    it("ping server", async () => {
+      const response = await trpc.healthcheck.query();
+      expect(response).toBe("yay!");
+    });
   });
-  console.log(cards);
+
+  describe("Testing Endpoints with Valid Data", () => {
+    it("test the filter across all of cards", async () => {
+      for (const singleTestData of validTestData.card) {
+        const response = await trpc.card.filter.query(singleTestData.input);
+        try {
+          expect(Array.isArray(response)).toBe(true);
+        } catch (error) {
+          console.log("Test failed. Response:", {
+            input: singleTestData.input,
+            response,
+          });
+          throw error; // Rethrow the error to ensure the test still fails.
+        }
+
+        // check isExist
+        singleTestData.isExist
+          ? expect(response.length).toBeGreaterThanOrEqual(1)
+          : expect(response.length).toBe(0);
+      }
+    });
+  });
+
+  describe("Testing Endpoints with Invalid Data", () => {
+    it("test the filter across all of cards", async () => {
+      for (const singleTestData of invalidTestData.card) {
+        await expect(
+          trpc.card.filter.query(singleTestData.input)
+        ).rejects.toThrow(singleTestData.errorMessage);
+      }
+    });
+  });
 }
 
-void main();
+void test();

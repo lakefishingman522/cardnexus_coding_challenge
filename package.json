@@ -9,7 +9,7 @@
     "dev:client": "wait-port 5000 && tsx watch src/client",
     "dev": "run-p dev:* --print-label",
     "ingest": "ts-node src/server/scripts/ingestData.ts",
-    "test": "ts-node src/client/index.test.ts"
+    "test": "jest"
   },
   "dependencies": {
     "@trpc/client": "npm:@trpc/client@next",

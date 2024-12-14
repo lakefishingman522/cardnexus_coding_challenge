@@ -1,5 +1,10 @@
 import { dbConfig } from "../config/db";
-import { excludeKey, findCommonElements, isSublist } from "../utils/utils";
+import {
+  excludeKey,
+  findCommonElements,
+  isSublist,
+  removeDuplicates,
+} from "../utils/utils";
 
 // get game names
 const gameNames = Object.keys(dbConfig.gameSpecificAttributes);
@@ -20,14 +25,17 @@ const filterGameNameMiddleware = async (opts: Record<string, any>) => {
   const gameExcludedInputKeys = Object.keys(gameExcludedInput);
 
   const filteredGames = inputNames.filter((gameName: string) => {
-    const gameDataKeys = Object.keys(dbConfig.gameSpecificAttributes[gameName]);
+    const gameDataKeys = removeDuplicates([
+      ...Object.keys(dbConfig.gameSpecificAttributes[gameName]),
+      ...Object.keys(dbConfig.commonAttributes),
+    ]);
 
     // compare keys
     if (!isSublist<string>(gameDataKeys, gameExcludedInputKeys)) return false;
 
     const excludeValues = gameExcludedInputKeys.filter((inputKey: string) => {
       // compare enum fields
-      if (dbConfig.gameSpecificAttributes[gameName][inputKey].enum?.length) {
+      if (dbConfig.gameSpecificAttributes[gameName][inputKey]?.enum?.length) {
         if (
           !findCommonElements(
             dbConfig.gameSpecificAttributes[gameName][inputKey].enum,

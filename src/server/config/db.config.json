@@ -3,8 +3,7 @@
     "game": { "type": "string", "required": true },
     "id": { "type": "string", "required": true, "unique": true },
     "name": { "type": "string", "required": true },
-    "rarity": { "type": "string", "required": true },
-    "attributes": { "type": "sbject", "default": {} }
+    "rarity": { "type": "string", "required": true }
   },
   "gameSpecificAttributes": {
     "mtg": {

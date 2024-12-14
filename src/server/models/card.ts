@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 import { dbConfig } from "../config/db";
 
-const CardSchema = new mongoose.Schema(dbConfig.commonAttributes);
+const CardSchema = new mongoose.Schema({
+  ...dbConfig.commonAttributes,
+  attributes: { type: Object, default: {} },
+});
 
 // indexing
 dbConfig.indexing.forEach((index: object) => {
