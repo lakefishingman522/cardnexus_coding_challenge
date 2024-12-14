@@ -9,7 +9,7 @@ import {
 // get game names
 const gameNames = Object.keys(dbConfig.gameSpecificAttributes);
 
-// return game list where the query fileds are located
+// return game list where the query fields are located
 const filterGameNameMiddleware = async (opts: Record<string, any>) => {
   const { input } = opts;
 
