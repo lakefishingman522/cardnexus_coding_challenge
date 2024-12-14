@@ -40,8 +40,6 @@ export const filterCard = async ({ input }: any) => {
         ? input.ink_cost[0]
         : { $gte: input.ink_cost[0], $lte: input.ink_cost[1] };
 
-  console.log("query", query);
-
   const cards = await safeFind(Card, query);
   // const cards = await Card.find(query, { _id: 0, __v: 0 }).lean();
   return cards;
