@@ -40,8 +40,9 @@ async function main() {
 
   // query
   const cards = await trpc.card.filter.query({
-    game: "mtg",
-    color: ["R", "U"],
+    game: ["mtg", "lorcana"],
+    rarity: ["Common", "common"],
+    color: ["R", "R", "G"],
   });
   console.log(cards);
 }
