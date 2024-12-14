@@ -38,6 +38,12 @@ npm run ingest
 
 It ingests the TCG data and uploads on mongodb, it creates the `cards` collection.
 
+#### Test Server Endpoints
+
+```bash
+npm run test
+```
+
 ## Commands
 
 ```bash
@@ -46,4 +52,5 @@ npm run ingest          # ingest TCG data and insert on mongodb
 npm run dev:server      # start server
 npm run dev:client      # start client
 npm run dev             # start server/client
+npm run test            # test server endpoints
 ```
