@@ -27,9 +27,9 @@ server/client with [tRPC] for ingesting and querying TCG data.
 ```bash
 Example Input:
 {
-    game: ["mtg", "lorcana", "lorcana"],
-    name: "so",
-    rarity: ["Uncommon", "Common", "Common", "common"],
+    game: ['mtg', 'lorcana', 'lorcana'],
+    name: 'so',
+    rarity: ['Uncommon', 'Common', 'Common', 'common'],
     ink_cost: [3, 6],
 }
 ```
