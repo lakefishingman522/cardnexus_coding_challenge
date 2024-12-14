@@ -36,16 +36,16 @@ Example Input:
 
 ### MiddleWares
 
-Middlewares <u>refactors/optimizes</u> the user-input query.
+Middlewares refactor/optimize the user-input query.
 
 - removeDuplicatesMiddleware: Remove duplicated elements in query list-fields and convert each single-value filed into one-length list field.
 
   ```bash
   Example Output:
   {
-    game: ["mtg", "lorcana"],
-    name: ["so"],
-    rarity: ["Uncommon", "Common", "common"],
+    game: ['mtg', 'lorcana'],
+    name: ['so'],
+    rarity: ['Uncommon', 'Common', 'common'],
     ink_cost: [3, 6],
   }
   ```
