@@ -134,7 +134,7 @@ It tests the server endpoints through Jest. You can change the test data in `src
 
 ```bash
 npm install             # install dependencies
-npm run ingest          # ingest TCG data and insert on mongodb
+npm run ingest          # ingest TCG data into mongodb
 npm run dev:server      # start server
 npm run dev:client      # start client
 npm run dev             # start server/client
