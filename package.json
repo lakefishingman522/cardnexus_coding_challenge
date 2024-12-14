@@ -4,7 +4,10 @@
   "description": "A backend service for ingesting and querying trading card game data.",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev:server": "tsx watch src/server",
+    "dev:client": "wait-port 5000 && tsx watch src/client",
+    "dev": "run-p dev:* --print-label"
   },
   "dependencies": {
     "@trpc/client": "npm:@trpc/client@next",
