@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
 import { convertTypes } from "../utils/utils";
+import DBConfigInteface from "../types/DBConfig";
 
 dotenv.config();
 
@@ -23,6 +24,6 @@ const disconnectDB = async () => {
 const jsonConfig = JSON.parse(
   fs.readFileSync(path.join(__dirname, "./db.config.json"), "utf-8")
 );
-const dbConfig: Record<string, any> = convertTypes(jsonConfig);
+const dbConfig = convertTypes(jsonConfig) as DBConfigInteface;
 
 export { connectDB, disconnectDB, dbConfig };

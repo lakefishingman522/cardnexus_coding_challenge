@@ -34,6 +34,15 @@
       "ink_cost": { "type": "number", "required": true }
     }
   },
+  "indexing": [
+    { "game": true },
+    { "name": "text" },
+    { "rarity": true },
+    { "game": 1, "name": 1 },
+    { "game": 1, "rarity": 1 },
+    { "game": 1, "attributes.color": 1 },
+    { "game": 1, "attributes.ink_cost": 1 }
+  ],
   "gameDataUrls": {
     "mtg": "https://cardnexus-hiring-docs.s3.eu-west-1.amazonaws.com/lorcana-cards.json",
     "lorcana": "https://cardnexus-hiring-docs.s3.eu-west-1.amazonaws.com/mtg-cards.json"

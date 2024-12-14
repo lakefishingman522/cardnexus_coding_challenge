@@ -9,7 +9,7 @@ const excludeKey = <T, K extends keyof T>(
 };
 
 // convert string value of type key into Type
-const convertTypes = (jsonConfig: Record<string, any>): Record<string, any> => {
+const convertTypes = (jsonConfig: Record<string, any>) => {
   const typeMap: Record<string, any> = {
     string: String,
     number: Number,
