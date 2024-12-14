@@ -1,0 +1,41 @@
+{
+  "commonAttributes": {
+    "game": { "type": "string", "required": true },
+    "id": { "type": "string", "required": true, "unique": true },
+    "name": { "type": "string", "required": true },
+    "rarity": { "type": "string", "required": true },
+    "attributes": { "type": "sbject", "default": {} }
+  },
+  "gameSpecificAttributes": {
+    "mtg": {
+      "rarity": {
+        "type": "string",
+        "required": true,
+        "enum": ["common", "mythic", "rare", "special", "uncommon"]
+      },
+      "color": { "type": "string", "enum": ["U", "B", "G", "R", "W"] }
+    },
+    "lorcana": {
+      "rarity": {
+        "type": "string",
+        "required": true,
+        "enum": [
+          [
+            "Common",
+            "Enchanted",
+            "Legendary",
+            "Promo",
+            "Rare",
+            "Super Rare",
+            "Uncommon"
+          ]
+        ]
+      },
+      "ink_cost": { "type": "number", "required": true }
+    }
+  },
+  "gameDataUrls": {
+    "mtg": "https://cardnexus-hiring-docs.s3.eu-west-1.amazonaws.com/lorcana-cards.json",
+    "lorcana": "https://cardnexus-hiring-docs.s3.eu-west-1.amazonaws.com/mtg-cards.json"
+  }
+}
