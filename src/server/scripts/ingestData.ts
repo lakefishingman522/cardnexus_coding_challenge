@@ -28,7 +28,9 @@ const loadAndUploadCardData = async (dataPath: string, gameName: string) => {
   );
 };
 
-const ingestData = async (gameNames: string[]) => {
+const ingestData = async () => {
+  const gameNames: string[] = Object.keys(dbConfig.gameSpecificAttributes);
+
   await connectDB();
   await Promise.all(
     gameNames.map((gameName) => {
@@ -38,4 +40,4 @@ const ingestData = async (gameNames: string[]) => {
   await disconnectDB();
 };
 
-ingestData(["mtg", "lorcana"]);
+ingestData();
