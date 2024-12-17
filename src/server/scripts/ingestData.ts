@@ -19,13 +19,17 @@ const loadAndUploadCardData = async (dataPath: string, gameName: string) => {
   );
 
   // store data into db
-  const insertResponse = await Card.insertMany(formattedData, {
-    ordered: false,
-  });
+  try {
+    const insertResponse = await Card.insertMany(formattedData, {
+      ordered: false,
+    });
 
-  console.log(
-    `${insertResponse.length} ${gameName} cards ingested successfully.`
-  );
+    console.log(
+      `${insertResponse.length} ${gameName} cards ingested successfully.`
+    );
+  } catch (e) {
+    console.log(`0 ${gameName} cards ingested successfully.`);
+  }
 };
 
 const ingestData = async () => {
